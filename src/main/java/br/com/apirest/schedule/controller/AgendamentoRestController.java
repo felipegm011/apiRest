@@ -1,5 +1,6 @@
 package br.com.apirest.schedule.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,38 @@ public class AgendamentoRestController {
     public ResponseEntity<List<Agendamento>> getProdutos(){
         List<Agendamento> lista = agendamentoRepository.findAll();
         return ResponseEntity.ok(lista);
+    }
+    
+    @GetMapping("/lista/finalizado")
+    public ResponseEntity<List<Agendamento>> getProdutosFinalizados(){
+    	
+    	List<Agendamento> finalizado = new ArrayList<Agendamento>();
+ 
+        List<Agendamento> lista = agendamentoRepository.findAll();
+        
+        for(Agendamento agend : lista) {
+        	if(agend.isFinalizada()) {
+        		finalizado.add(agend);
+        	}
+        }
+        
+        return ResponseEntity.ok(finalizado);
+    }
+    
+    @GetMapping("/lista/finalizadofalse")
+    public ResponseEntity<List<Agendamento>> getProdutosFinalizadosfalse(){
+    	
+    	List<Agendamento> finalizado = new ArrayList<Agendamento>();
+ 
+        List<Agendamento> lista = agendamentoRepository.findAll();
+        
+        for(Agendamento agend : lista) {
+        	if(!agend.isFinalizada()) {
+        		finalizado.add(agend);
+        	}
+        }
+        
+        return ResponseEntity.ok(finalizado);
     }
 
     @GetMapping("/agendamento/{id}")

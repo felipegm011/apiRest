@@ -31,6 +31,17 @@ public class Agendamento implements Serializable {
 	
 	@Column(name = "assunto")
 	private String assunto;
+	
+	@Column(name = "finalizada")
+	private boolean finalizada;
+	
+	public boolean isFinalizada() {
+		return finalizada;
+	}
+
+	public void setFinalizada(boolean finalizada) {
+		this.finalizada = finalizada;
+	}
 
 	public Long getId() {
 		return id;
