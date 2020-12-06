@@ -2,6 +2,7 @@ package br.projetos.api.apiRestSpring;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,16 +35,28 @@ public class AgendamentoRest {
         return ResponseEntity.ok(retorno);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<Agendamento> atualizarAgendamento(@RequestBody Agendamento agendamento){
-        if(agendamento.getId()==null){
-            ResponseEntity.notFound().build();
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Agendamento> atualizarAgendamento(@PathVariable Long id, @RequestBody Agendamento agendamento){
+    	Optional<Agendamento> anterior = agendamentoRepository.findById(id);
+       
+    	if(anterior.isPresent()){
+    		Agendamento a = anterior.get();
+            a.setNome(agendamento.getNome());
+            a.setCurso(agendamento.getCurso());
+            a.setMatricula(agendamento.getMatricula());
+            a.setData(agendamento.getData());
+            a.setAssunto(agendamento.getAssunto());
+            a.setFinalizada(agendamento.getFinalizada());
+            
+            agendamentoRepository.save(a);
+            
+            return ResponseEntity.ok(a);
+        }else {
+        	return (ResponseEntity<Agendamento>) ResponseEntity.notFound();
         }
-        agendamento = agendamentoRepository.save(agendamento);
-        
-        return ResponseEntity.ok(agendamento);
     }
-
+   
+   
     @GetMapping("/lista")
     public ResponseEntity<List<Agendamento>> getAgendamento(){
         List<Agendamento> lista = agendamentoRepository.findAll();
