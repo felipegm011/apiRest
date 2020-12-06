@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 //import br.com.apirest.schedule.model.Agendamento;
-@CrossOrigin(origins = "*")
-//@CrossOrigin(origins = "*", allowedHeaders = "*" )
+//@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*" )
 
 //@CrossOrigin(origins = "http://localhost:4200")
 @RestController
