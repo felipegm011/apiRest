@@ -52,7 +52,7 @@ public class AgendamentoRest {
             
             return ResponseEntity.ok(a);
         }else {
-        	return (ResponseEntity<Agendamento>) ResponseEntity.notFound();
+        	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
    
