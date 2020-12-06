@@ -29,13 +29,13 @@ public class AgendamentoRest {
 	@Autowired
     AgendamentoRepository agendamentoRepository;
 
-    @PostMapping("/cadastro")
+    @PostMapping("/agendamento")
     public ResponseEntity<Agendamento> salvarAgendamento(@RequestBody Agendamento agendamento){
         Agendamento retorno = agendamentoRepository.save(agendamento);
         return ResponseEntity.ok(retorno);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/agendamento/{id}")
     public ResponseEntity<Agendamento> atualizarAgendamento(@PathVariable("id") Long id, @RequestBody Agendamento agendamento){
     	Optional<Agendamento> anterior = agendamentoRepository.findById(id);
        
@@ -57,54 +57,22 @@ public class AgendamentoRest {
     }
    
    
-    @GetMapping("/lista")
+    @GetMapping("/agendamento")
     public ResponseEntity<List<Agendamento>> getAgendamento(){
         List<Agendamento> lista = agendamentoRepository.findAll();
         return ResponseEntity.ok(lista);
     }
 
-    @GetMapping("/lista/{id}")
+    @GetMapping("/agendamento/{id}")
     public ResponseEntity<Agendamento> getProdutoById(@PathVariable("id") Long id){
         Agendamento agendamento = agendamentoRepository.findById(id).get();
         return ResponseEntity.ok(agendamento);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/agendamento/{id}")
     public ResponseEntity delete(@PathVariable("id")  Long id){
     	agendamentoRepository.deleteById(id);
         return ResponseEntity.ok().build();
-    }
-    
-    @GetMapping("/lista/finalizado")
-    public ResponseEntity<List<Agendamento>> getProdutosFinalizados(){
-    	
-    	List<Agendamento> finalizado = new ArrayList<Agendamento>();
- 
-        List<Agendamento> lista = agendamentoRepository.findAll();
-        
-        for(Agendamento agend : lista) {
-        	if(agend.getFinalizada() == "true") {
-        		finalizado.add(agend);
-        	}
-        }
-        
-        return ResponseEntity.ok(finalizado);
-    }
-    
-    @GetMapping("/lista/finalizadofalse")
-    public ResponseEntity<List<Agendamento>> getProdutosFinalizadosfalse(){
-    	
-    	List<Agendamento> finalizado = new ArrayList<Agendamento>();
- 
-        List<Agendamento> lista = agendamentoRepository.findAll();
-        
-        for(Agendamento agend : lista) {
-        	if(agend.getFinalizada() == "false") {
-        		finalizado.add(agend);
-        	}
-        }
-        
-        return ResponseEntity.ok(finalizado);
     }
 	
 }
