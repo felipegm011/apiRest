@@ -36,7 +36,7 @@ public class AgendamentoRest {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Agendamento> atualizarAgendamento(@PathVariable Long id, @RequestBody Agendamento agendamento){
+    public ResponseEntity<Agendamento> atualizarAgendamento(@PathVariable("id") Long id, @RequestBody Agendamento agendamento){
     	Optional<Agendamento> anterior = agendamentoRepository.findById(id);
        
     	if(anterior.isPresent()){
