@@ -69,6 +69,13 @@ public class AgendamentoRest {
         return ResponseEntity.ok(agendamento);
     }
     
+    /*
+    @PostMapping("/login")
+    public ResponseEntity<Login> loginAgendamento(@RequestBody Login login){
+        //Login retorno = agendamentoRepository.save(login);
+        return ResponseEntity.ok(retorno);
+    }*/
+    
     @DeleteMapping("/agendamento/{id}")
     public ResponseEntity delete(@PathVariable("id")  Long id){
     	agendamentoRepository.deleteById(id);
