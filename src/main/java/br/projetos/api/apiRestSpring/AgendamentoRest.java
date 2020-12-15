@@ -68,7 +68,7 @@ public class AgendamentoRest {
         Agendamento agendamento = agendamentoRepository.findById(id).get();
         return ResponseEntity.ok(agendamento);
     }
-
+    
     @DeleteMapping("/agendamento/{id}")
     public ResponseEntity delete(@PathVariable("id")  Long id){
     	agendamentoRepository.deleteById(id);
