@@ -66,6 +66,18 @@ public class AgendamentoRest {
         List<Agendamento> lista = agendamentoRepository.findAll();
         return ResponseEntity.ok(lista);
     }
+    
+    @PostMapping("/login")
+    public ResponseEntity<Login> salvarLogin(@RequestBody Login login){
+        Login retorno = loginAgendamento.save(login);
+        return ResponseEntity.ok(retorno);
+    }
+    
+    @GetMapping("/login")
+    public ResponseEntity<List<Login>> getLogin(){
+        List<Login> lista = loginAgendamento.findAll();
+        return ResponseEntity.ok(lista);
+    }
 
     @GetMapping("/agendamento/{id}")
     public ResponseEntity<Agendamento> getProdutoById(@PathVariable("id") Long id){
@@ -78,10 +90,10 @@ public class AgendamentoRest {
     	agendamentoRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
-    
+    /*
     @RequestMapping("/login")
     public ResponseEntity login(@RequestBody Login login) {
         return ResponseEntity.ok(login.getUsuario().equals("admin") && login.getSenha().equals("admin"));
-    }
+    }*/
 	
 }
