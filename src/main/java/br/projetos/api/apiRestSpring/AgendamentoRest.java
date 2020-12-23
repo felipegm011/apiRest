@@ -28,12 +28,16 @@ public class AgendamentoRest {
 	
 	@Autowired
     AgendamentoRepository agendamentoRepository;
+	
+	@Autowired
+	LoginRepository loginAgendamento;
 
     @PostMapping("/agendamento")
     public ResponseEntity<Agendamento> salvarAgendamento(@RequestBody Agendamento agendamento){
         Agendamento retorno = agendamentoRepository.save(agendamento);
         return ResponseEntity.ok(retorno);
     }
+
 
     @PutMapping("/agendamento/{id}")
     public ResponseEntity<Agendamento> atualizarAgendamento(@PathVariable("id") Long id, @RequestBody Agendamento agendamento){
@@ -69,17 +73,15 @@ public class AgendamentoRest {
         return ResponseEntity.ok(agendamento);
     }
     
-    /*
-    @PostMapping("/login")
-    public ResponseEntity<Login> loginAgendamento(@RequestBody Login login){
-        //Login retorno = agendamentoRepository.save(login);
-        return ResponseEntity.ok(retorno);
-    }*/
-    
     @DeleteMapping("/agendamento/{id}")
     public ResponseEntity delete(@PathVariable("id")  Long id){
     	agendamentoRepository.deleteById(id);
         return ResponseEntity.ok().build();
+    }
+    
+    @RequestMapping("/login")
+    public ResponseEntity login(@RequestBody Login login) {
+        return ResponseEntity.ok(login.getUsuario().equals("admin") && login.getSenha().equals("admin"));
     }
 	
 }
